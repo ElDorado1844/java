@@ -1,0 +1,108 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package abhishekm.termwork15;
+
+import java.util.Scanner;
+
+
+   
+public class NewClass {
+    public static void main(String [] args)
+    {
+        int a[];
+         int size;
+         Scanner in=new Scanner(System.in);
+         size=in.nextInt();
+          a=new int[size];
+            System.out.println("Enter Array elements");
+        for(int i=0;i<size;i++)
+        {
+            a[i]=in.nextInt();
+        }
+        System.out.println("the array elements are\n");
+           for(int i=0;i<size;i++)
+        {
+           System.out.println(""+a[i]+"\t");
+        }
+           sort(a,2,6);
+               System.out.println("the sorted array elements are\n");
+           for(int i=0;i<size;i++)
+        {
+           System.out.println(""+a[i]+"\t");
+        }
+        
+        
+    }
+    static void sort(int a[])
+    {
+        int i=0,j;
+        int temp;
+        System.out.println("Default order");
+        for(i=0;i<a.length;i++)
+        {
+            for(j=i+1;j<a.length;j++)
+            {
+                if(a[i]>a[j])
+                {
+                    temp=a[i];
+                    a[i]=a[j];
+                    a[j]=temp;
+                }
+            }
+        }
+    }
+    
+  static  void sort(int a[],String type)
+    {  int i,j,temp;
+        switch(type)
+        {
+            case "ASC" :        System.out.println("Ascedingt order");
+           for(i=0;i<a.length;i++)
+        {
+            for(j=i+1;j<a.length;j++)
+            {
+                if(a[i]>a[j])
+                {
+                    temp=a[i];
+                    a[i]=a[j];
+                    a[j]=temp;
+                }
+            }
+        }
+                    break;
+            case "DSC":   System.out.println("Descending order");
+           for(i=0;i<a.length;i++)
+        {
+            for(j=i+1;j<a.length;j++)
+            {
+                if(a[i]<a[j])
+                {
+                    temp=a[i];
+                    a[i]=a[j];
+                    a[j]=temp;
+                }
+            }
+        }
+                    break;
+        }
+    }
+    static void sort(int a[],int si,int ei)
+    {
+        int i,temp,j;
+        for(i=si;i<=ei;i++)
+        {
+            for(j=i+1;j<=ei;j++)
+            {
+                   if(a[i]>a[j])
+                {
+                    temp=a[i];
+                    a[i]=a[j];
+                    a[j]=temp;
+                }   
+            }
+        }
+    }
+    
+}
