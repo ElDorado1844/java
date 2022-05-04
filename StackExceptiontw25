@@ -1,0 +1,103 @@
+import java.lang.Exception;
+import java.util.Scanner;
+
+class UnderflowException extends Exception
+{
+    UnderflowException()
+            {
+                super("the Stack doesnt contain any elements");
+            }
+    @Override
+  public String  toString()
+    {
+        return "StackUnderflow";
+    }
+}
+class OverflowException extends Exception
+{
+   OverflowException()
+            {
+                super("the Stack full");
+            }
+    @Override
+  public String  toString()
+    {
+        return "StackOverflow";
+    }
+}
+
+class Stack
+{
+ int top=-1;
+
+int size;
+int []a;
+Stack(int s)
+{
+    size=s;
+   a=new int[size];
+   top=-1;
+}
+void push(int e) throws OverflowException
+{
+    if(top==size-1)
+        throw new OverflowException();
+    else
+    {
+        a[++top]=e;
+    }
+}
+int pop() throws UnderflowException
+{
+    if(top==-1)
+    {
+        throw new UnderflowException();
+    }
+    else
+        return a[top--];
+}
+
+}
+public class ExceptionDEmo {
+    public static void main(String []args)
+    {
+        int size,eleout;
+      System.out.println("Enter the size of stack");
+        Scanner in=new Scanner(System.in);
+        size=in.nextInt();
+        Stack s=new Stack(size);
+        while(true)
+        {
+            System.out.println("Enter 1 to push element\n");
+            System.out.println("Enter 2 to pop element\n");
+            int choice=in.nextInt();
+            try{
+            switch(choice)
+            {
+                case 1: System.out.println("Enter the element to be pushed");
+                            int ele=in.nextInt();
+                            s.push(ele);
+                            break;
+                            
+                case 2: eleout=s.pop();
+                            System.out.println("Element popped is :"+eleout);
+            }}
+            catch(UnderflowException e)
+                    {
+                    e.getMessage();
+                    System.out.println(""+e);
+                    e.printStackTrace();
+                   }
+             catch(OverflowException e)
+                    {
+                    e.getMessage();
+                    System.out.println(""+e);
+                    e.printStackTrace();
+                   }
+       
+        }
+       
+        
+    }
+    
+}
