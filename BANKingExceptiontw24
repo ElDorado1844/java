@@ -1,0 +1,116 @@
+import java.lang.Exception;
+import java.util.Scanner;
+class InsufficientBalance extends Exception
+{
+    InsufficientBalance()
+    {
+        super("Insufficient Balance maintained");
+        }
+  @Override
+    public String toString()
+    {
+        return "Your account doesnt has sufficient balance";
+    }
+}
+class InvalidAmount extends Exception
+{
+    InvalidAmount()
+    {
+        super("Invalid Amount");
+        }
+  @Override
+    public String toString()
+    {
+        return "The amount entered is not valid";
+    }
+}
+class CustomerAccount{
+    double acno;
+    double balance;
+    String Name;
+    CustomerAccount(String n,double ac)
+    {
+     balance=0;
+     Name=n;
+     acno=ac;
+    }
+    void depositAmount(double  amount) throws InvalidAmount
+    {
+        if(amount<0)
+            throw new InvalidAmount();
+        else
+        {
+            balance+=amount;
+            System.out.println("balance="+balance);
+            System.out.println("The amount deposited");
+            
+        }
+    }
+         void withdraw(double  amount) throws InvalidAmount,InsufficientBalance
+    {
+        if(amount<0)
+            throw new InvalidAmount();
+        else if(amount>balance)
+        {
+            throw new InsufficientBalance();
+        }
+        else
+        {
+            balance-=amount;
+             System.out.println("balance="+balance);
+            System.out.println("The amount withdrawn is"+amount);
+             
+        }
+        
+    }
+}
+public class Banking {
+    public static void main(String[]args)
+    {
+        CustomerAccount c;
+        double amount;
+        c =new CustomerAccount("Abhishek",00052151225);
+        while(true)
+        {
+            System.out.println("Welcome to Banking "+c.Name);
+            System.out.println("Enter 1 to deposit amount, 2 to withdrwal");;
+            Scanner in=new Scanner(System.in);
+            int choice=in.nextInt();
+            try
+            {
+                switch(choice)
+                {
+                    case 1: System.out.println("Enter the amount to be deposited");
+                                amount=in.nextDouble();
+                                c.depositAmount(amount);
+                                break;
+                             
+                     case 2: System.out.println("Enter the amount to be withdrawn");
+                                amount=in.nextDouble();
+                                c.withdraw(amount);
+                                break;
+                                
+                }}
+            catch(InvalidAmount e)
+            {
+                System.out.println(""+e);
+                e.getMessage();
+                e.printStackTrace();
+            }
+            catch(InsufficientBalance  e)
+            {
+                System.out.println(""+e);
+                e.getMessage();
+                e.printStackTrace();
+            }
+            finally
+                    {
+                        System.out.println("control is in finall");
+                    }
+            
+            
+            
+        }
+    }
+    
+}
