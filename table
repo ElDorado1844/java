@@ -1,0 +1,127 @@
+package practiceForTermwork;
+
+import javax.swing.*;
+import java.awt.event.*;
+
+public class TW30 extends JFrame implements ActionListener{
+	JLabel rollJLabel,nameJLabel,m1JLabel,m2JLabel,m3JLabel;
+	JTextField rollField,nameField,m1JTextField,m2JTextField,m3JTextField;
+	JButton addButton,closeButton;
+	JTable table;
+	JScrollPane sp;
+	String [][]data= {};
+	String []cols= {"Roll No","Name","Marks-1","Marks-2","Marks-3","Average"};
+	TW30(){
+		this.setTitle("Student Data Entry");
+		this.setSize(800,500);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setLayout(null);
+		
+		rollJLabel=new JLabel("Roll No:");
+		rollJLabel.setBounds(20,50,50,15);
+		this.add(rollJLabel);
+		
+		rollField=new JTextField();
+		rollField.setBounds(75,50,90,25);
+		this.add(rollField);
+		
+		nameJLabel=new JLabel("Name:");
+		nameJLabel.setBounds(20,85,50,15);
+		this.add(nameJLabel);
+		
+		nameField=new JTextField();
+		nameField.setBounds(75,85,100,25);
+		this.add(nameField);
+		
+		m1JLabel=new JLabel("Marks-1:");
+		m1JLabel.setBounds(20,120,50,15);
+		this.add(m1JLabel);
+		
+		m1JTextField=new JTextField();
+		m1JTextField.setBounds(75,120,50,25);
+		this.add(m1JTextField);
+		
+		m2JLabel=new JLabel("Marks-2:");
+		m2JLabel.setBounds(20,155,50,15);
+		this.add(m2JLabel);
+		
+		m2JTextField=new JTextField();
+		m2JTextField.setBounds(75,155,50,25);
+		this.add(m2JTextField);
+		
+		m3JLabel=new JLabel("Marks-3:");
+		m3JLabel.setBounds(20,190,50,15);
+		this.add(m3JLabel);
+		
+		m3JTextField=new JTextField();
+		m3JTextField.setBounds(75,190,50,25);
+		this.add(m3JTextField);
+		
+		addButton=new JButton("Add");
+		addButton.setBounds(25,250,60,25);
+		addButton.addActionListener(this);
+		this.add(addButton);
+		
+		closeButton=new JButton("Close");
+		closeButton.setBounds(100,250,70,25);
+		closeButton.addActionListener(this);
+		this.add(closeButton);
+		
+		this.setVisible(true);
+		
+		
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		new TW30();
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getActionCommand()=="Add") {
+			data=addData(data,rollField.getText(),nameField.getText(),m1JTextField.getText(),m2JTextField.getText(),m3JTextField.getText());
+			display(data);
+			rollField.setText("");
+			nameField.setText("");
+			m1JTextField.setText("");
+			m2JTextField.setText("");
+			m3JTextField.setText("");
+			
+		}
+		if(e.getActionCommand()=="Close") {
+			table=new JTable(data,cols);
+			sp = new JScrollPane(table);
+	        sp.setBounds(300,100,350,300);
+	        this.add(sp);
+		}
+	}
+	
+	String[][] addData(String[][] arr,String roll,String name,String m1,String m2,String m3){
+		int len=arr.length+1;
+		int sum=Integer.parseInt(m1)+Integer.parseInt(m2)+Integer.parseInt(m3);
+		float avg=sum/3;
+		String [][] newData=new String[len][6];
+		for(int i=0;i<len-1;i++) {
+			for(int j=0;j<6;j++) {
+				newData[i][j]=arr[i][j];
+			}
+		}
+		newData[len-1][0]=roll;
+		newData[len-1][1]=name;
+		newData[len-1][2]=m1;
+		newData[len-1][3]=m2;
+		newData[len-1][4]=m3;
+		newData[len-1][5]=(avg+"");
+		return newData;
+	}
+	
+	void display(String [][]arr) {
+		for(int i=0;i<arr.length;i++) {
+			for(int j=0;j<6;j++) {
+				System.out.print(arr[i][j]+"  ");
+			}
+			System.out.println();
+		}
+	}
+	
+}
